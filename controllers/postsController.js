@@ -1,4 +1,4 @@
-const posts = require('../data/postData');
+const posts = require('../data/postsData');
 
 function index(req, res) {
     // copiamo la logica dell'index
