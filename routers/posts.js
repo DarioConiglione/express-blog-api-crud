@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router();
-const posts = require('../data/postData');
+const posts = require('../data/postsData');
 
 
 // index
