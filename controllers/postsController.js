@@ -32,6 +32,8 @@ function destroy(req, res) {
     // Rimuoviamo la pizza dal menu
     posts.splice(posts.indexOf(post), 1);
     console.log(posts);
+    res.sendStatus(204);
+
 
 }
 
