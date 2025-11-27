@@ -1,24 +1,39 @@
 const posts = require('../data/postsData');
 
 function index(req, res) {
-    // copiamo la logica dell'index
     res.json(posts);
 }
+
 function show(req, res) {
-    // copiamo la logica della show
-    res.json(posts[req.params.id])
+    const id = parseInt(req.params.id)
+    const post = posts.find(post => post.id === id);
+    res.json(post);
 }
+
 function store(req, res) {
-    // copiamo la logica della store
     res.send('Creazione nuovo post');
 }
+
 function update(req, res) {
-    // copiamo la logica dell'update
     res.send('Modifica integrale del post ' + req.params.id);
 }
+
 function destroy(req, res) {
-    // copiamo la logica della destroy
-    res.send('Eliminazione del post ' + req.params.id)
+    const id = parseInt(req.params.id)
+    const post = posts.find(post => post.id === id);
+    if (!post) {
+        res.status(404);
+        return res.json({
+            status: 404,
+            error: "Not Found",
+            message: "Post non trovato"
+        })
+    }
+    // Rimuoviamo la pizza dal menu
+    posts.splice(posts.indexOf(post), 1);
+    console.log(posts);
+
 }
-// esportiamo tutto
+
+
 module.exports = { index, show, store, update, destroy }
