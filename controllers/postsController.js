@@ -1,9 +1,9 @@
 const posts = require('../data/postsData');
-
+//index
 function index(req, res) {
     res.json(posts);
 }
-
+//show
 function show(req, res) {
     const id = parseInt(req.params.id);
     const post = posts.find(post => post.id === id);
@@ -17,15 +17,46 @@ function show(req, res) {
     }
     res.json(post);
 }
-
+//store
 function store(req, res) {
+    const newId = posts[posts.length - 1].id + 1;
+    // Creiamo un nuovo post
+    const newPost = {
+        id: newId,
+        title: req.body.title,
+        content: req.body.content,
+        image: req.body.image,
+        tags: req.body.tags
+    }
+    // Aggiungiamo il nuovo post
+    posts.push(newPost);
+    // controlliamo
+    console.log(posts);
+
+    // Restituiamo lo status corretto e il posto appena creata
+    res.status(201);
+    res.json(newPost);
     res.send('Creazione nuovo post');
 }
-
+//update
 function update(req, res) {
-    res.send('Modifica integrale del post ' + req.params.id);
+    const id = parseInt(req.params.id);
+    const post = posts.find(post => post.id === id);
+    if (!post) {
+        res.status(404);
+        return res.json({
+            status: 404,
+            error: "Not Found",
+            message: "Post non trovato"
+        })
+    }
+    post.title = req.body.title;
+    post.content = req.body.content;
+    post.image = req.bdy.image
+    post.tags = req.body.tags;
+    res.json(posts);
 }
-
+//destroy
 function destroy(req, res) {
     const id = parseInt(req.params.id)
     const post = posts.find(post => post.id === id);

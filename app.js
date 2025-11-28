@@ -5,7 +5,14 @@ const postsRouter = require('./routers/posts');
 
 
 app.use(express.static('public'));
+app.use(express.json());
 
+app.post("/", (req, res) => {
+    // dentro req.body troveremo
+    // i dati ricevuti in formato json
+    console.log(req.body);
+    // ...
+});
 
 app.get('/', (req, res) => {
     res.send('Server del mio Blog!')
