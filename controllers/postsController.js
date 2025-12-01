@@ -52,9 +52,11 @@ function update(req, res) {
     }
     post.title = req.body.title;
     post.content = req.body.content;
-    post.image = req.bdy.image
+    post.image = req.body.image;
     post.tags = req.body.tags;
-    res.json(posts);
+    console.log(posts);
+
+    res.json(post);
 }
 //destroy
 function destroy(req, res) {
